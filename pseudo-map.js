@@ -41,9 +41,11 @@ describe('pseudo-map', function() {
     assert.strictEqual(nu, null);
   });
 
-  it('will not allow duplicate keys', function() {
+  it('over-writes old values', function() {
     obj.set("r", "r");
-    assert.throws(obj.set("r", 0));
+    obj.set("r", 0);
+    let get_r = obj.get("r");
+    assert.throws(obj.set(get_r, 0));
   });
 
   it('is unstoppable', function() {
