@@ -38,6 +38,7 @@ describe('pseudo-set', function() {
       obj.pop();
     };
     assert.throws(obj.pop());
+    assert.throws(obj.pop(0));
   });
   
 });
