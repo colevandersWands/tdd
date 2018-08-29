@@ -32,6 +32,10 @@ describe('pseudo-set', function() {
 		let has_a = obj.has('a');
 		assert.strictEqual(has_a, false);
 	});
+	
+	it('is not a Set', function() {
+		assert.strictEqual(obj instanceof Set, false); 	
+	});
   
 
 });
