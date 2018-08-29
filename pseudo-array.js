@@ -1,6 +1,6 @@
 // for tddbin.com
 
-describe('mocha+assert API description', function() {
+describe('pseudo-set', function() {
   
   it('can add values to the end', function() {
     obj.push('a');
