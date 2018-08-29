@@ -46,25 +46,17 @@ This project focuses entirely on TDD, we will discuss BDD later on in the Testin
 
 ## Specifications
 
-1. Follow these guides to TDD & Functional Programming:
-  * [TDD](http://www.kaidez.com/learn-javascript-unit-testing/#review-james-code)
-  * [Functional Programming](https://jrsinclair.com/articles/2016/gentle-introduction-to-functional-javascript-intro/)
-  * [Accompanying GitHub Repo](https://github.com/kaidez/functional-programming-unit-testing)
-2. Start building TDD Kata Repos.  Just like with the Codewars project, you're never truly finished.  This exercise will grow with you. Try to complete 3-4 per week.  Each repo will have:
+Start building TDD Kata Repos.  
   * README
     1. Introduction to the problem
-    3. Kata requirements explained in order, each linking to their markdowns
-    4. Learning Notes
-  * Live gh-pages tests as in the CodeWars Repos.
-  * Completed, Refactored, Beautiful Solution.
-  * REQUIREMENT.md - one per requirement in your kata
-    1. Describe this requirement.  Explain how it builds on the last one.
-    2. List each test case and what you did to pass it
-    3. Include your passing code as a snippet
-    4. Describe & include your refactored code as a snippet
-3. Request code reviews for each finished TDD repo.
+    2. A section per set of requirements:
+        1. Describe this requirement.  Explain how it relates to previous ones
+        2. List each test case and what challenges it introduced
+        3. Describe & include your first passing code as a snippet
+        4. Describe & include your refactored code as a snippet
+    3. Beautiful, completed & refactored solution that passes all the tests
+    4. Learning Notes, helpful links, any studies you made from this kata
 
-A usual, build a gallery page to feature your Katas and put it up on your portfolio.
 
 
 Challenge:
@@ -77,17 +69,24 @@ Challenge:
 ## Resources
 
 
+Live, Online TDD:
+* [TDDBin](http://tddbin.com)
+
 Lists of Katas:
 * Great:
   * [ES6 Katas](http://es6katas.org)
-  * 
-* Easier:
-  * [CodeWars](https://www.codewars.com/)
-  * [Exercism](https://github.com/exercism/javascript)
 * Harder:
   * [Michael Whelan's](http://www.michael-whelan.net/code-katas-for-practicing-tdd/)
   * [With Accompanying Videos](http://www.codekatas.org)
   * [CodeKata](http://codekata.com)
+* Not exactly katas, but can be with some imagination:
+  * [CodeWars](https://www.codewars.com/)
+  * [Exercism](https://github.com/exercism/javascript)
+
+A nice learning sequence:
+  * [TDD](http://www.kaidez.com/learn-javascript-unit-testing/#review-james-code)
+  * [Functional Programming](https://jrsinclair.com/articles/2016/gentle-introduction-to-functional-javascript-intro/)
+  * [Accompanying GitHub Repo](https://github.com/kaidez/functional-programming-unit-testing)
 
 TDD:
 * [Three Rules of TDD](http://www.tddfellow.com/blog/2017/02/03/learning-test-driven-development-with-javascript-laws-of-tdd/) 
@@ -103,9 +102,6 @@ TDD:
 * [Anti-TDD](https://hackhands.com/dont-code-katas/)
 * [Uncle Bob Speaks](https://www.youtube.com/watch?v=GvAzrC6-spQ)
 
-
-Live, Online TDD:
-* [TDDBin](http://tddbin.com)
 
 Pure Functions:
 * [Very Clear Video](https://www.youtube.com/watch?v=AHbRVJzpB54)
