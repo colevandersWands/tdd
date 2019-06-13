@@ -1,3 +1,6 @@
+// for tddbin.com
+var obj = {};
+
 describe('pseudo-map', function() {
   let key_1 = {};
   let key_2 = {};
