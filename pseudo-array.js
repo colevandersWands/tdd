@@ -1,4 +1,5 @@
 // for tddbin.com
+var obj = {};
 
 describe('pseudo-set', function() {
   
