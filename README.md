@@ -91,6 +91,7 @@ Pure Functions:
 other janke's to check:
 * [test cases](https://github.com/janke-learning/test-cases)
 * [implicit coercion](https://github.com/janke-learning/implicit-coercion)
+* [comparadigms](https://github.com/janke-learning/comparadigms)
 
 Challenge:
 * [Build Your own Testing Framework](http://www.tddfellow.com/blog/2016/07/15/build-your-own-testing-framework/).
