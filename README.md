@@ -44,28 +44,6 @@ This project focuses entirely on TDD, we will discuss BDD later on in the Testin
 
 ---
 
-## Specifications
-
-Start building TDD Kata Repos.  
-  * README
-    1. Introduction to the problem
-    2. A section per set of requirements:
-        1. Describe this requirement.  Explain how it relates to previous ones
-        2. List each test case and what challenges it introduced
-        3. Describe & include your first passing code as a snippet
-        4. Describe & include your refactored code as a snippet
-    3. Beautiful, completed & refactored solution that passes all the tests
-    4. Learning Notes, helpful links, any studies you made from this kata
-
-
-
-Challenge:
-* [Build Your own Testing Framework](http://www.tddfellow.com/blog/2016/07/15/build-your-own-testing-framework/).
-
-[TOP](#index)
-
----
-
 ## Resources
 
 
@@ -102,6 +80,7 @@ TDD:
 * [Pros & Cons](https://www.quora.com/What-are-the-pros-and-cons-of-test-driven-development)
 * [Anti-TDD](https://hackhands.com/dont-code-katas/)
 * [Uncle Bob Speaks](https://www.youtube.com/watch?v=GvAzrC6-spQ)
+* [Test Coverage](https://www.guru99.com/test-coverage-in-software-testing.html)
 
 
 Pure Functions:
@@ -109,9 +88,12 @@ Pure Functions:
 * [Article](https://medium.com/@jamesjefferyuk/javascript-what-are-pure-functions-4d4d5392d49c)
 * [Article & Video](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976), more advanced.
 
-Challenge:
-* [Code Coverage with Istanbul](https://istanbul.js.org)
+other janke's to check:
+* [test cases](https://github.com/janke-learning/test-cases)
+* [implicit coercion](https://github.com/janke-learning/implicit-coercion)
 
+Challenge:
+* [Build Your own Testing Framework](http://www.tddfellow.com/blog/2016/07/15/build-your-own-testing-framework/).
 
 
 [TOP](#index)
@@ -119,5 +101,4 @@ Challenge:
 
 ___
 ___
-### <a href="http://elewa.education/blog" target="_blank"><img src="https://user-images.githubusercontent.com/18554853/34921062-506450ae-f97d-11e7-875f-6feeb26ad72d.png" width="100" height="40"/></a>
-
+### <a href="http://janke-learning.org" target="_blank"><img src="https://user-images.githubusercontent.com/18554853/50098409-22575780-021c-11e9-99e1-962787adaded.png" width="40" height="40"></img> Janke Learning</a>
