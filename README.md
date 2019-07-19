@@ -2,11 +2,10 @@
 
 Test Driven Development is a philosophy that says you should write tests first, then write the code to pass them.  
 
-In theory this will make it easier to avoid bugs and even easier to track down. This is certainly true if you are an experienced developer working on the a project who's architecture, team, and requirements will allow TDD.  But not all projects are conducive to TDD, and it can take some time before you understand development well enough to integrate TDD into your work-flow.
+In theory this will make it easier to avoid bugs and even easier to track down. This is certainly true if you are an experienced developer already familiar with software architecture and development.  But as a beginner you'll probably find it more confusing than helpful for a while.  Stick with it!  There are few better ways to enforce disciplined programming, soon enough it'll make sense.
 
 What is undeniable is that learning TDD early on in your programming life will teach you strong habits like organized refactoring, thinking of code in terms of behavior not implementation, checking yourself early & often, and explaining your thought process.
 
-In this project you will learn how to use TDD as an effective learning tool by completing and analyzing a minimum of 5 TDD Katas and organizing them into a gallery landing page as you did with JS 30 and CodeWars.
 
 ### Index
 * [Learning Objectives](#learning-objectives)
@@ -18,19 +17,12 @@ In this project you will learn how to use TDD as an effective learning tool by c
 ## Learning Objectives
 
 * TDD
-* Basic Functional Programming
+* JavaScript data structures
 
 ### TDD
 
 ![](https://www.allaboutcircuits.com/uploads/articles/red-green-refactor.png)
 
-### Functional Programming
-
-This is a highly complex subject, you will learn more about it when we begin to study Statefull Frontend Applications.  For now a basic understanding will be more than enough.  Functional Programming is when you build your applications completely out of _pure functions_:
-
-> _Pure Function_: It's return value is determined exclusively by it's arguments.
-
-Building applications entirely from pure functions is a good habit, but requires a high level of programming experience.  You are encouraged to apply this paradigm as often as you can without over-complicating your projects.
 
 ### TDD vs BDD
 
@@ -62,9 +54,9 @@ Lists of Katas:
   * [Exercism](https://github.com/exercism/javascript)
 
 A nice learning sequence:
-  * [TDD](http://www.kaidez.com/learn-javascript-unit-testing/#review-james-code)
-  * [Functional Programming](https://jrsinclair.com/articles/2016/gentle-introduction-to-functional-javascript-intro/)
-  * [Accompanying GitHub Repo](https://github.com/kaidez/functional-programming-unit-testing)
+* [TDD](http://www.kaidez.com/learn-javascript-unit-testing/#review-james-code)
+* [Functional Programming](https://jrsinclair.com/articles/2016/gentle-introduction-to-functional-javascript-intro/)
+* [Accompanying GitHub Repo](https://github.com/kaidez/functional-programming-unit-testing)
 
 TDD:
 * [Three Rules of TDD](http://www.tddfellow.com/blog/2017/02/03/learning-test-driven-development-with-javascript-laws-of-tdd/) 
