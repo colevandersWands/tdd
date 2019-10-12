@@ -1,0 +1,161 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>tdd site</title>
+  <meta name="description" content="tdd site">
+
+  <script src="state-to-source.js"></script>
+
+  <script src="https://unpkg.com/prettier@1.13.0/standalone.js"></script>
+  <script src="https://unpkg.com/prettier@1.13.0/parser-babylon.js"></script>
+
+  <link href="./testing-utils/mocha.css" rel="stylesheet" />
+  <script src="./testing-utils/mocha.js"></script>
+  <script src="./testing-utils/assert.js"></script>
+
+  <script src="./ace/ace.js" type="text/javascript" charset="utf-8"></script>
+
+
+  <script src="./linking/ctr-c.js"></script>
+  <script src="./linking/open-in-pytut.js"></script>
+  <script src="./linking/permalinking.js"></script>
+
+
+  <script>
+    window.onload = () => {
+
+      mocha.setup({
+        ui: 'bdd',
+        // globals: ['*']
+      });
+
+
+      (new Function(editor.getValue()))();
+
+      // const mochaDiv = document.getElementById('mocha');
+      // while (mochaDiv.firstChild) {
+      //   mochaDiv.removeChild(mochaDiv.firstChild);
+      // };
+      mocha.run();
+    }
+  </script>
+</head>
+
+<body>
+
+  <header>
+    <button id='run-tests'>run tests</button>
+    <script>
+      // mocha.checkLeaks();
+      document.getElementById('run-tests').addEventListener('click', () => {
+
+        // mocha.setup({
+        //   ui: 'bdd',
+        //   // globals: ['*']
+        // });
+
+
+        const mochaDiv = document.getElementById('mocha');
+        while (mochaDiv.firstChild) {
+          mochaDiv.removeChild(mochaDiv.firstChild);
+        };
+
+        mocha.suite.suites = [];
+
+        (new Function('mocha', 'return ' + editor.getValue()))(mocha);
+
+        mocha.run()
+      });
+    </script>
+
+    <button id='prettify'>prettify code</button>
+    <script>
+      document.getElementById('prettify').onclick = function () {
+        editor.setValue(
+          prettier.format(
+            editor.getValue(),
+            {
+              parser: "babylon",
+              plugins: prettierPlugins
+            }
+          )
+        )
+      };
+    </script>
+
+    <button id='gen-permalink'>generate:</button>
+    <input id='permalink' placeholder="permalink"><input>
+    <script>
+      document.getElementById('gen-permalink')
+        .addEventListener('click', function () {
+          const code = editor.getValue();
+          const url = generate_permalink(code, encode_query, 'tdd');
+          const perma_display = document.getElementById("permalink");
+          perma_display.value = url;
+          copy_to_clipboard(url);
+          alert('copied permalink');
+        })
+    </script>
+  </header>
+
+
+  <section style="position: relative; top: 0; bottom: 0; left: 0; right: 0; height:100%; width:100%;">
+    <table>
+      <tr style="height:100%">
+        <td style="width:60%;height:100%;">
+          <div id="editor" style=" width:100%; height: 100%;"></div>
+        </td>
+        <td style="width:40%;height:100%;">
+          <div id="mocha"></div>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+
+  <script>
+
+    // mocha.setup({
+    //   ui: 'bdd',
+    //   // globals: ['*']
+    // })
+
+    var editor = ace.edit("editor");
+
+    editor.setTheme('ace/theme/chrome');
+    editor.setFontSize(15);
+    editor.getSession().setMode('ace/mode/javascript');
+    editor.getSession().setTabSize(2);
+
+    var query = read_snippet_query();
+    if (query) {
+      // https://prettier.io/blog/2018/05/27/1.13.0.html
+      editor.setValue(prettier.format(query, {
+        parser: "babylon",
+        plugins: prettierPlugins
+      }));
+      editor.resize(true);
+    } else {
+      editor.setValue(`describe("behavior", function() {
+  it("should 1", function() {
+    assert.ok("ok");
+    assert.ok("");
+  });
+
+  it("should 2", function() {
+    assert.ok("fine");
+    assert.ok("yups");
+  });
+});
+`);
+    };
+
+    // https://ace.c9.io/demo/autoresize.html
+
+  </script>
+
+
+</body>
+
+</html>
