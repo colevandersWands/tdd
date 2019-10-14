@@ -16,10 +16,16 @@
 
   <script src="./ace/ace.js" type="text/javascript" charset="utf-8"></script>
 
-
   <script src="./linking/ctr-c.js"></script>
   <script src="./linking/open-in-pytut.js"></script>
   <script src="./linking/permalinking.js"></script>
+
+  <link href="./guesses-history/modal.css" rel="stylesheet" />
+  <script src="./guesses-history/update-modal.js"></script>
+  <script src="./guesses-history/modal.js"></script>
+
+  <script src="./prism/script.js"></script>
+  <link rel="stylesheet" type="text/css" href="./prism/style.css">
 
 
   <script>
@@ -31,13 +37,21 @@
       });
 
 
-      (new Function(editor.getValue()))();
+      const code = editor.getValue();
+      // const funcBody = `
+      //     describe("try ${tries.length} ",function(){
+      //       ${code}
+      //     });`;
+      const funcBody = code;
+      (new Function(funcBody))();
 
-      // const mochaDiv = document.getElementById('mocha');
-      // while (mochaDiv.firstChild) {
-      //   mochaDiv.removeChild(mochaDiv.firstChild);
-      // };
       mocha.run();
+
+      const mochaDiv = document.getElementById("mocha");
+      const report = mochaDiv.lastChild;
+      tries.push({ code, report });
+      // report.remove();
+      // mochaDiv.insertBefore(report, mochaDiv.firstChild);
     }
   </script>
 </head>
@@ -48,26 +62,33 @@
     <button id='run-tests'>run tests</button>
     <script>
       // mocha.checkLeaks();
-      document.getElementById('run-tests').addEventListener('click', () => {
+      var runTests = () => {
 
-        // mocha.setup({
-        //   ui: 'bdd',
-        //   // globals: ['*']
-        // });
+        document.getElementById("mocha-stats").remove();
+        updateModal(
+          tries[tries.length - 1].code,
+          tries[tries.length - 1].report,
+          tries.length
+        );
 
-
-        const mochaDiv = document.getElementById('mocha');
-        while (mochaDiv.firstChild) {
-          mochaDiv.removeChild(mochaDiv.firstChild);
-        };
+        const code = editor.getValue();
 
         mocha.suite.suites = [];
 
-        (new Function('mocha', 'return ' + editor.getValue()))(mocha);
+        const funcBody = code;
+        (new Function(funcBody))();
 
-        mocha.run()
-      });
+        mocha.run();
+
+        const mochaDiv = document.getElementById("mocha");
+        const report = mochaDiv.lastChild;
+        tries.push({ code, report });
+
+      }
+      document.getElementById('run-tests').addEventListener('click', runTests);
     </script>
+
+    <a href='#guesses-history' data-modal-open><button>review tries</button></a>
 
     <button id='prettify'>prettify code</button>
     <script>
@@ -84,8 +105,8 @@
       };
     </script>
 
-    <button id='gen-permalink'>generate:</button>
-    <input id='permalink' placeholder="permalink"><input>
+    <button id='gen-permalink'>generate permalink:</button>
+    <input id='permalink' placeholder="link will be here">
     <script>
       document.getElementById('gen-permalink')
         .addEventListener('click', function () {
@@ -97,34 +118,39 @@
           alert('copied permalink');
         })
     </script>
+
+    <details id='exercise-details'>
+      <summary>select a new exercise</summary>
+    </details>
+    <script src="./exercises/loader.js"></script>
+
+    <script>
+      document.body.appendChild(document.createElement('hr'));
+    </script>
   </header>
 
 
-  <section style="position: relative; top: 0; bottom: 0; left: 0; right: 0; height:100%; width:100%;">
-    <table>
-      <tr style="height:100%">
-        <td style="width:60%;height:100%;">
-          <div id="editor" style=" width:100%; height: 100%;"></div>
-        </td>
-        <td style="width:40%;height:100%;">
-          <div id="mocha"></div>
-        </td>
-      </tr>
-    </table>
-  </section>
+
+  <div id='flexy' style='height:90vh; display:flex; flex-direction: row;'>
+    <div id="editor" style=" width:50%; height: 100%;"></div>
+
+
+    <div id="mocha" style='width:50%;margin-top:0;max-height:100%;overflow-y:scroll'></div>
+
+  </div>
 
 
   <script>
 
-    // mocha.setup({
-    //   ui: 'bdd',
-    //   // globals: ['*']
-    // })
+    const LastSlashIndex = window.location.href.lastIndexOf('/');
+    var href = window.location.href.substr(0, LastSlashIndex);
+
+    var tries = [];
 
     var editor = ace.edit("editor");
 
     editor.setTheme('ace/theme/chrome');
-    editor.setFontSize(15);
+    editor.setFontSize(12);
     editor.getSession().setMode('ace/mode/javascript');
     editor.getSession().setTabSize(2);
 
@@ -155,6 +181,27 @@
 
   </script>
 
+  <!-- begin guess history modal -->
+
+
+  <div id="guesses-history" style="display:none;">
+    <div id="the-guesses" style="padding-right: 5%; padding-left: 5%; padding-bottom: 5%; ">
+      <!-- <div id="the-guesses" style="height: 75vh; width: 100vh; overflow-y: auto">
+      </div> -->
+    </div>
+  </div>
+
+
+  <div class="modal" style="">
+    <div class="modal-inner" style="height: 100%; width: 100%; overflow-y: auto;">
+      <a data-modal-close>X</a>
+      <div class="modal-content" style="overflow-y: scroll;"></div>
+    </div>
+  </div>
+
+  <script>var modal = new VanillaModal.default();</script>
+
+  <!-- end guess history modal -->
 
 </body>
 
