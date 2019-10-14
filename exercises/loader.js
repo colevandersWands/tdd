@@ -4,10 +4,10 @@ const exercises = {
     'almost-map',
     'almost-set',
   ],
-  comparadigms: [ // https://github.com/janke-learning/comparadigms
-    'oop',
-    'pure-functions'
-  ]
+  // comparadigms: [ // https://github.com/janke-learning/comparadigms
+  //   'oop',
+  //   'pure-functions'
+  // ]
 }
 
 const loader = (exercisePath) => {
