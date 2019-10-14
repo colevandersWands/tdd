@@ -5,8 +5,6 @@
   <title>tdd site</title>
   <meta name="description" content="tdd site">
 
-  <script src="state-to-source.js"></script>
-
   <script src="https://unpkg.com/prettier@1.13.0/standalone.js"></script>
   <script src="https://unpkg.com/prettier@1.13.0/parser-babylon.js"></script>
 
@@ -17,31 +15,18 @@
   <script src="./ace/ace.js" type="text/javascript" charset="utf-8"></script>
 
   <script src="./linking/ctr-c.js"></script>
-  <script src="./linking/open-in-pytut.js"></script>
   <script src="./linking/permalinking.js"></script>
 
-  <link href="./guesses-history/modal.css" rel="stylesheet" />
-  <script src="./guesses-history/update-modal.js"></script>
-  <script src="./guesses-history/modal.js"></script>
-
-  <script src="./prism/script.js"></script>
-  <link rel="stylesheet" type="text/css" href="./prism/style.css">
 
 
   <script>
     window.onload = () => {
-
       mocha.setup({
         ui: 'bdd',
         // globals: ['*']
       });
 
-
       const code = editor.getValue();
-      // const funcBody = `
-      //     describe("try ${tries.length} ",function(){
-      //       ${code}
-      //     });`;
       const funcBody = code;
       (new Function(funcBody))();
 
@@ -50,8 +35,6 @@
       const mochaDiv = document.getElementById("mocha");
       const report = mochaDiv.lastChild;
       tries.push({ code, report });
-      // report.remove();
-      // mochaDiv.insertBefore(report, mochaDiv.firstChild);
     }
   </script>
 </head>
@@ -61,34 +44,23 @@
   <header>
     <button id='run-tests'>run tests</button>
     <script>
-      // mocha.checkLeaks();
-      var runTests = () => {
-
+      document.getElementById('run-tests').addEventListener('click', () => {
         document.getElementById("mocha-stats").remove();
-        updateModal(
-          tries[tries.length - 1].code,
-          tries[tries.length - 1].report,
-          tries.length
-        );
-
-        const code = editor.getValue();
+        document.getElementById("mocha-report").remove();
 
         mocha.suite.suites = [];
 
-        const funcBody = code;
-        (new Function(funcBody))();
+        const code = editor.getValue();
+        (new Function(code))();
 
         mocha.run();
 
-        const mochaDiv = document.getElementById("mocha");
-        const report = mochaDiv.lastChild;
-        tries.push({ code, report });
-
-      }
-      document.getElementById('run-tests').addEventListener('click', runTests);
+        tries.push({
+          code,
+          report: document.getElementById("mocha").lastChild
+        });
+      });
     </script>
-
-    <a href='#guesses-history' data-modal-open><button>review tries</button></a>
 
     <button id='prettify'>prettify code</button>
     <script>
@@ -132,38 +104,34 @@
 
 
   <div id='flexy' style='height:90vh; display:flex; flex-direction: row;'>
-    <div id="editor" style=" width:50%; height: 100%;"></div>
-
-
-    <div id="mocha" style='width:50%;margin-top:0;max-height:100%;overflow-y:scroll'></div>
-
+    <div id="editor" style=" width:65%; height: 100%;"></div>
+    <div id="mocha" style='width:45%;margin-top:0;max-height:100%;overflow-y:scroll'></div>
   </div>
 
 
   <script>
-
     const LastSlashIndex = window.location.href.lastIndexOf('/');
     var href = window.location.href.substr(0, LastSlashIndex);
 
     var tries = [];
 
     var editor = ace.edit("editor");
-
     editor.setTheme('ace/theme/chrome');
     editor.setFontSize(12);
     editor.getSession().setMode('ace/mode/javascript');
     editor.getSession().setTabSize(2);
 
-    var query = read_snippet_query();
-    if (query) {
-      // https://prettier.io/blog/2018/05/27/1.13.0.html
-      editor.setValue(prettier.format(query, {
-        parser: "babylon",
-        plugins: prettierPlugins
-      }));
-      editor.resize(true);
-    } else {
-      editor.setValue(`describe("behavior", function() {
+    // coming soon
+    // var query = read_snippet_query();
+    // if (query) {
+    //   // https://prettier.io/blog/2018/05/27/1.13.0.html
+    //   editor.setValue(prettier.format(query, {
+    //     parser: "babylon",
+    //     plugins: prettierPlugins
+    //   }));
+    //   editor.resize(true);
+    // } else {
+    editor.setValue(`describe("behavior", function() {
   it("should 1", function() {
     assert.ok("ok");
     assert.ok("");
@@ -175,33 +143,11 @@
   });
 });
 `);
-    };
+    // };
 
     // https://ace.c9.io/demo/autoresize.html
 
   </script>
-
-  <!-- begin guess history modal -->
-
-
-  <div id="guesses-history" style="display:none;">
-    <div id="the-guesses" style="padding-right: 5%; padding-left: 5%; padding-bottom: 5%; ">
-      <!-- <div id="the-guesses" style="height: 75vh; width: 100vh; overflow-y: auto">
-      </div> -->
-    </div>
-  </div>
-
-
-  <div class="modal" style="">
-    <div class="modal-inner" style="height: 100%; width: 100%; overflow-y: auto;">
-      <a data-modal-close>X</a>
-      <div class="modal-content" style="overflow-y: scroll;"></div>
-    </div>
-  </div>
-
-  <script>var modal = new VanillaModal.default();</script>
-
-  <!-- end guess history modal -->
 
 </body>
 
