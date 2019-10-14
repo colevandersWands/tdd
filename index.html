@@ -27,8 +27,9 @@
       });
 
       const code = editor.getValue();
-      const funcBody = code;
-      (new Function(funcBody))();
+      const newFunc = (new Function(`return function editor(){${code}}`))();
+      // newFunc.name = 'editor';
+      newFunc();
 
       mocha.run();
 
@@ -44,14 +45,16 @@
   <header>
     <button id='run-tests'>run tests</button>
     <script>
-      document.getElementById('run-tests').addEventListener('click', () => {
+      var runTests = () => {
         document.getElementById("mocha-stats").remove();
         document.getElementById("mocha-report").remove();
 
         mocha.suite.suites = [];
 
         const code = editor.getValue();
-        (new Function(code))();
+        const newFunc = (new Function(`return function editor(){${code}}`))();
+        // newFunc.name = 'editor';
+        newFunc();
 
         mocha.run();
 
@@ -59,7 +62,8 @@
           code,
           report: document.getElementById("mocha").lastChild
         });
-      });
+      };
+      document.getElementById('run-tests').addEventListener('click', runTests);
     </script>
 
     <button id='prettify'>prettify code</button>
@@ -104,8 +108,8 @@
 
 
   <div id='flexy' style='height:90vh; display:flex; flex-direction: row;'>
-    <div id="editor" style=" width:65%; height: 100%;"></div>
-    <div id="mocha" style='width:45%;margin-top:0;max-height:100%;overflow-y:scroll'></div>
+    <div id="editor" style=" width:55%; height: 100%;"></div>
+    <div id="mocha" style='width:45%;margin-right:0;margin-top:0;margin-left:0;max-height:100%;overflow-y:scroll'></div>
   </div>
 
 
@@ -131,16 +135,19 @@
     //   }));
     //   editor.resize(true);
     // } else {
-    editor.setValue(`describe("behavior", function() {
-  it("should 1", function() {
-    assert.ok("ok");
-    assert.ok("");
-  });
+    editor.setValue(`describe('mocha + assert', () => {
 
-  it("should 2", function() {
-    assert.ok("fine");
-    assert.ok("yups");
-  });
+  it('value is truthy', () => assert.ok(true));
+
+  it('complex types equal?', () => assert.deepStrictEqual([1,2,3], [1,2,3]));
+  it('complex types dont equal?', () => assert.notDeepStrictEqual([1,2,3], ['one', 'two']));
+
+  it('value and type equal?', () => assert.strictEqual('1', '1'));
+  it('complex types dont equal?', () => assert.notStrictEqual(1, '1'));
+
+  it('throws?', () => assert.throws(() => { throw new Error(); }));
+  it('does not throw?', () => assert.doesNotThrow(() => {}));
+
 });
 `);
     // };

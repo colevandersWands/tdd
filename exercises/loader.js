@@ -4,13 +4,9 @@ const exercises = {
     'almost-map',
     'almost-set',
   ],
-  beginner: [
-    'evedont',
-    'kishy',
-    { e: ['e', 'e '] }
-  ],
-  ['actual-beginner']: [
-    'poo'
+  comparadigms: [ // https://github.com/janke-learning/comparadigms
+    'oop',
+    'pure-functions'
   ]
 }
 
@@ -59,7 +55,7 @@ const loader = (exercisePath) => {
     const button = document.createElement('button');
     button.innerHTML = name;
     const finalPath = `${path}/${name}`;
-    button.onclick = () => { loader(finalPath) };
+    button.onclick = () => { loader(finalPath); runTests(); };
     container.appendChild(button);
   };
   const exerciseDetails = document.getElementById('exercise-details');
