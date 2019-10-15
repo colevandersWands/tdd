@@ -40,11 +40,11 @@ This project focuses entirely on TDD, we will discuss BDD later on in the Testin
 
 
 Live, Online TDD:
-* [the code in this repo](htts://janke-learning.github.io/tdd)
+* [janke-learning.org/tdd](https://janke-learning.github.io/tdd)
 * [TDDBin](http://tddbin.com) (inspiration for the code in this repo)
 
 Lists of Katas:
-* [the code in this repo](htts://janke-learning.github.io/tdd) comes with exercises
+* [janke-learning.org/tdd](https://janke-learning.github.io/tdd)
 * Tricky:
   * [ES6 Katas](http://es6katas.org)
 * Harder:
