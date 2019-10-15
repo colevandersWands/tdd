@@ -7,9 +7,9 @@ const runTests = () => {
   mocha.suite.suites = [];
 
   const code = editor.getValue();
-  const newFunc = (new Function(`return function __editor(){${code}}`))();
 
   try {
+    const newFunc = (new Function(`return function __editor(){${code.toString()}}`))();
     newFunc();
     mocha.run();
     tries.push({
@@ -17,11 +17,14 @@ const runTests = () => {
       report: document.getElementById("mocha").lastChild
     });
   } catch (err) {
-    console.log(err);
     mocha.suite.suites = [];
     mocha.suite.tests = [];
     mocha.setup({ ui: 'bdd', bail: false });
-    document.getElementById('mocha').innerHTML = 'you broke mocha. time to reset it';
+    const errorCode = document.createElement('code');
+    errorCode.innerHTML = `
+<strong>${err.name}</strong>: line ${err.lineNumber - 2} <br>${err.message}`;
+    errorCode.style = 'color:red;';
+    document.getElementById('mocha').appendChild(errorCode);
     tries.push({
       code,
       report: err
