@@ -11,19 +11,41 @@ const exercises = {
 }
 
 const loader = (exercisePath) => {
-  fetch(`${href}/${exercisePath}.js`)
-    .then(function (response) {
-      return response.text();
-    })
-    .then(function (exercise) {
-      editor.setValue(exercise);
-      runTests();
-    })
-    .catch(function (err) {
-      throw err;
-    })
-}
+  if (loader.cache[exercisePath]) {
+    editor.setValue(loader.cache[exercisePath]);
+    runTests();
+  } else {
+    fetch(`${href}/${exercisePath}.js`)
+      .then(function (response) {
+        return response.text();
+      })
+      .then(function (exercise) {
+        loader.cache[exercisePath] = exercise;
+        editor.setValue(exercise);
+        history.pushState(loader.cache, "", `?exercise=${encodeQuery(exercisePath)}`);
+        runTests()
+      })
+      .catch(function (err) {
+        editor.setValue(`${err.name}: ${err.message}`);
+        console.log(err);
+      })
+  }
+};
+loader.cache = {
+  '': `describe('mocha + assert', () => {
 
+  it('value is truthy', () => assert.ok(true));
+
+  it('complex types equal?', () => assert.deepStrictEqual([1,2,3], [1,2,3]));
+  it('complex types dont equal?', () => assert.notDeepStrictEqual([1,2,3], ['one', 'two']));
+
+  it('value and type equal?', () => assert.strictEqual('1', '1'));
+  it('complex types dont equal?', () => assert.notStrictEqual(1, '1'));
+
+  it('throws?', () => assert.throws(() => { throw new Error(); }));
+  it('does not throw?', () => assert.doesNotThrow(() => {}));
+
+});`};
 
 {
   const renderItem = (item, path, container) => {

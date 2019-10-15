@@ -8,65 +8,47 @@
   <script src="https://unpkg.com/prettier@1.13.0/standalone.js"></script>
   <script src="https://unpkg.com/prettier@1.13.0/parser-babylon.js"></script>
 
-  <link href="./testing-utils/mocha.css" rel="stylesheet" />
-  <script src="./testing-utils/mocha.js"></script>
-  <script src="./testing-utils/assert.js"></script>
+  <link href="./mocha-assert/mocha.css" rel="stylesheet" />
+  <script src="./mocha-assert/mocha.js"></script>
+  <script src="./mocha-assert/assert.js"></script>
 
   <script src="./ace/ace.js" type="text/javascript" charset="utf-8"></script>
 
   <script src="./linking/ctr-c.js"></script>
   <script src="./linking/permalinking.js"></script>
 
+  <script src="./tdding/load-from-url.js"></script>
+  <script src="./tdding/reset-mocha.js"></script>
+  <script src="./tdding/run-tests.js"></script>
+  <script src="./tdding/tries.js"></script>
+
 
 
   <script>
+    const LastSlashIndex = window.location.href.lastIndexOf('/');
+    var href = window.location.href.substr(0, LastSlashIndex);
+
     window.onload = () => {
-      mocha.setup({
-        ui: 'bdd',
-        // globals: ['*']
-      });
-
-      const code = editor.getValue();
-      const newFunc = (new Function(`return function editor(){${code}}`))();
-      // newFunc.name = 'editor';
-      newFunc();
-
-      mocha.run();
-
-      const mochaDiv = document.getElementById("mocha");
-      const report = mochaDiv.lastChild;
-      tries.push({ code, report });
+      mocha.setup({ ui: 'bdd', bail: false });
+      loadFromURL();
+      runTests();
     }
+    window.addEventListener('popstate', function (e) {
+      loadFromURL();
+      runTests();
+    });
   </script>
 </head>
 
 <body>
 
   <header>
-    <button id='run-tests'>run tests</button>
+    <button style='height:45px' id='run-tests'>run tests</button>
     <script>
-      var runTests = () => {
-        document.getElementById("mocha-stats").remove();
-        document.getElementById("mocha-report").remove();
-
-        mocha.suite.suites = [];
-
-        const code = editor.getValue();
-        const newFunc = (new Function(`return function editor(){${code}}`))();
-        // newFunc.name = 'editor';
-        newFunc();
-
-        mocha.run();
-
-        tries.push({
-          code,
-          report: document.getElementById("mocha").lastChild
-        });
-      };
       document.getElementById('run-tests').addEventListener('click', runTests);
     </script>
 
-    <button id='prettify'>prettify code</button>
+    <button style='height:45px' id='prettify'>prettify code</button>
     <script>
       document.getElementById('prettify').onclick = function () {
         editor.setValue(
@@ -81,22 +63,21 @@
       };
     </script>
 
-    <button id='gen-permalink'>generate permalink:</button>
+    <button style='height:45px' id='reset-mocha'>reset mocha</button>
+    <script>
+      const resetButton = document.getElementById('reset-mocha');
+      resetButton.onclick = resetMocha;
+    </script>
+
+    <button style='height:45px' id='gen-permalink'>generate permalink:</button>
     <input id='permalink' placeholder="link will be here">
     <script>
       document.getElementById('gen-permalink')
-        .addEventListener('click', function () {
-          const code = editor.getValue();
-          const url = generate_permalink(code, encode_query, 'tdd');
-          const perma_display = document.getElementById("permalink");
-          perma_display.value = url;
-          copy_to_clipboard(url);
-          alert('copied permalink');
-        })
+        .addEventListener('click', genPermalink)
     </script>
 
     <details id='exercise-details'>
-      <summary>select a new exercise</summary>
+      <summary>select an exercise</summary>
     </details>
     <script src="./exercises/loader.js"></script>
 
@@ -109,51 +90,17 @@
 
   <div id='flexy' style='height:90vh; display:flex; flex-direction: row;'>
     <div id="editor" style=" width:55%; height: 100%;"></div>
+    <script>
+      var editor = ace.edit("editor");
+      editor.setTheme('ace/theme/chrome');
+      editor.setFontSize(12);
+      editor.getSession().setMode('ace/mode/javascript');
+      editor.getSession().setTabSize(2);
+      editor.resize(true);
+    </script>
     <div id="mocha" style='width:45%;margin-right:0;margin-top:0;margin-left:0;max-height:100%;overflow-y:scroll'></div>
   </div>
 
-  <script>
-    const LastSlashIndex = window.location.href.lastIndexOf('/');
-    var href = window.location.href.substr(0, LastSlashIndex);
-
-    var tries = [];
-
-    var editor = ace.edit("editor");
-    editor.setTheme('ace/theme/chrome');
-    editor.setFontSize(12);
-    editor.getSession().setMode('ace/mode/javascript');
-    editor.getSession().setTabSize(2);
-
-    // coming soon
-    // var query = read_snippet_query();
-    // if (query) {
-    //   // https://prettier.io/blog/2018/05/27/1.13.0.html
-    //   editor.setValue(prettier.format(query, {
-    //     parser: "babylon",
-    //     plugins: prettierPlugins
-    //   }));
-    //   editor.resize(true);
-    // } else {
-    editor.setValue(`describe('mocha + assert', () => {
-
-  it('value is truthy', () => assert.ok(true));
-
-  it('complex types equal?', () => assert.deepStrictEqual([1,2,3], [1,2,3]));
-  it('complex types dont equal?', () => assert.notDeepStrictEqual([1,2,3], ['one', 'two']));
-
-  it('value and type equal?', () => assert.strictEqual('1', '1'));
-  it('complex types dont equal?', () => assert.notStrictEqual(1, '1'));
-
-  it('throws?', () => assert.throws(() => { throw new Error(); }));
-  it('does not throw?', () => assert.doesNotThrow(() => {}));
-
-});
-`);
-    // };
-
-    // https://ace.c9.io/demo/autoresize.html
-
-  </script>
 
   <!-- https://github.com/tholman/github-corners -->
   <a href="https://github.com/janke-learning/tdd" target="_blank" class="github-corner"

@@ -1,16 +1,15 @@
-// for tddbin.com
-var obj = {};
+const obj = {};
 
-describe('pseudo-set', function() {
-  
-  it('can add values to the end', function() {
+describe('pseudo-array', function () {
+
+  it('can add values to the end', function () {
     obj.push('a');
     assert.deepEqual(obj[0], 'a');
     obj.push('b');
     assert.deepEqual(obj[1], 'b');
   });
 
-  it('can remove values from the end', function() {
+  it('can remove values from the end', function () {
     obj.pop();
     assert.deepEqual(obj[1], undefined);
     assert.deepEqual(obj[0], 'a');
@@ -18,7 +17,7 @@ describe('pseudo-set', function() {
     assert.deepEqual(obj[0], undefined);
   });
 
-  it('can read arbitrary values', function() {
+  it('can read arbitrary values', function () {
     for (let i = 0; i < 5; i++) {
       obj.push(i);
     };
@@ -29,17 +28,17 @@ describe('pseudo-set', function() {
     assert.deepEqual(obj[0], 0);
   });
 
-  it('can remove arbitrary elements', function() {
+  it('can remove arbitrary elements', function () {
     obj.pop(2);
     assert.deepEqual(obj[2], 3);
   });
 
-  it('throws error if un-poppable is popped', function() {
+  it('throws error if un-poppable is popped', function () {
     for (let i = 0; i < 4; i++) {
       obj.pop();
     };
     assert.throws(obj.pop());
     assert.throws(obj.pop(0));
   });
-  
+
 });
