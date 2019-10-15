@@ -7,7 +7,7 @@ const runTests = () => {
   mocha.suite.suites = [];
 
   const code = editor.getValue();
-  const newFunc = (new Function(`return function editor(){${code}}`))();
+  const newFunc = (new Function(`return function __editor(){${code}}`))();
 
   try {
     newFunc();

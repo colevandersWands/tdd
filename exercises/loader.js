@@ -1,13 +1,17 @@
 const exercises = {
-  advanced: [
-    'almost-array',
-    'almost-map',
-    'almost-set',
+  ['how-to-tdd']: [
+    'test-suites',
+    'tests',
+    'nesting-test-suites',
+    'assert-dot-ok',
+    'passing-tests',
   ],
-  // comparadigms: [ // https://github.com/janke-learning/comparadigms
-  //   'oop',
-  //   'pure-functions'
-  // ]
+  ['using-assert']: [
+
+  ],
+  ['test-cases']: [
+    'loopingem'
+  ],
 }
 
 const loader = (exercisePath) => {
@@ -23,7 +27,11 @@ const loader = (exercisePath) => {
         loader.cache[exercisePath] = exercise;
         editor.setValue(exercise);
         history.pushState(loader.cache, "", `?exercise=${encodeQuery(exercisePath)}`);
-        runTests()
+        try {
+          runTests();
+        } catch (err) {
+          resetMocha();
+        }
       })
       .catch(function (err) {
         editor.setValue(`${err.name}: ${err.message}`);
