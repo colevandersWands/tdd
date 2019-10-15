@@ -1,16 +1,17 @@
 const runTests = () => {
-  const mochaNode = document.getElementById('mocha');
-  while (mochaNode.firstChild) {
-    mochaNode.removeChild(mochaNode.firstChild);
-  }
-
-  mocha.suite.suites = [];
-
-  const code = editor.getValue();
-
   try {
+    const mochaNode = document.getElementById('mocha');
+    while (mochaNode.firstChild) {
+      mochaNode.removeChild(mochaNode.firstChild);
+    }
+
+    mocha.suite.suites = [];
+
+    const code = editor.getValue();
+    // could be better sandboxed
     const newFunc = (new Function(`return function __editor(){${code.toString()}}`))();
     newFunc();
+
     mocha.run();
     tries.push({
       code,

@@ -40,8 +40,8 @@ function funky(thing) {
 };
 
 describe('funky function', () => {
-  describe('strings should be converted to numbers', () => {
-    describe('valid number strings are cast directly', () => {
+  describe('strings should return a number', () => {
+    describe('non-NaNy strings are cast to numbers', () => {
       it('whole positive numbers', () => {
         assert.ok(funky('1') === 1, '"1" should return 1');
       });
