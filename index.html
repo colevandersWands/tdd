@@ -29,6 +29,7 @@
 
     window.onload = () => {
       mocha.setup({ ui: 'bdd', bail: false });
+      editor.setValue(loader.cache['']);
       loadFromURL(href);
       runTests();
     }
@@ -42,7 +43,12 @@
 <body>
 
   <header>
-    <button style='height:45px' id='run-tests'>run tests</button>
+    <a href="http://janke-learning.org" style="position:relative;top:15px;" target="_blank">
+      <img src="https://user-images.githubusercontent.com/18554853/50098409-22575780-021c-11e9-99e1-962787adaded.png"
+        width="40" height="40" alt='janke learning' />
+    </a>
+
+    <button style=' height:45px' id='run-tests'>run tests</button>
     <script>
       document.getElementById('run-tests').addEventListener('click', runTests);
     </script>
@@ -68,16 +74,16 @@
       document.getElementById('gen-permalink')
         .addEventListener('click', genPermalink)
     </script>
-
-    <details id='exercise-details'>
-      <summary>select an exercise</summary>
-    </details>
-    <script src="./exercises/loader.js"></script>
-
-    <script>
-      document.body.appendChild(document.createElement('hr'));
-    </script>
   </header>
+
+  <details id='exercise-details' style="padding-top:5px">
+    <summary>select an exercise</summary>
+  </details>
+  <script src="./exercises/loader.js"></script>
+
+  <script>
+    document.body.appendChild(document.createElement('hr'));
+  </script>
 
 
 
