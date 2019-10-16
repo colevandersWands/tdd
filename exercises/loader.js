@@ -9,17 +9,22 @@ const exercises = {
   ['using-assert']: [
 
   ],
-  ['test-cases']: [
-    'loopingem'
+  ['pure-functions']: [
+    'merge-arrays',
+    'merge-objects',
+    'replace-by-index',
+    'repeat-items',
   ],
 }
 
-const loader = (exercisePath) => {
-  if (loader.cache[exercisePath]) {
+const loader = (basePath, exercisePath) => {
+  loader.cache[loader.current] = editor.getValue();
+  loader.current = exercisePath;
+  if (typeof loader.cache[exercisePath] === 'string') {
     editor.setValue(loader.cache[exercisePath]);
     runTests();
   } else {
-    fetch(`${href}/${exercisePath}.js`)
+    fetch(`${basePath}/${exercisePath}.js`)
       .then(function (response) {
         return response.text();
       })
@@ -27,18 +32,15 @@ const loader = (exercisePath) => {
         loader.cache[exercisePath] = exercise;
         editor.setValue(exercise);
         history.pushState(loader.cache, "", `?exercise=${encodeQuery(exercisePath)}`);
-        try {
-          runTests();
-        } catch (err) {
-          resetMocha();
-        }
+        runTests();
       })
       .catch(function (err) {
-        editor.setValue(`${err.name}: ${err.message}`);
+        editor.setValue(`// see console for loading error`);
         console.log(err);
       })
   }
 };
+loader.current = '';
 loader.cache = {
   '': `describe('mocha + assert', () => {
 
@@ -85,7 +87,7 @@ loader.cache = {
     const button = document.createElement('button');
     button.innerHTML = name;
     const finalPath = `${path}/${name}`;
-    button.onclick = () => { loader(finalPath); runTests(); };
+    button.onclick = () => { loader(href, finalPath); runTests(); };
     container.appendChild(button);
   };
   const exerciseDetails = document.getElementById('exercise-details');

@@ -29,11 +29,11 @@
 
     window.onload = () => {
       mocha.setup({ ui: 'bdd', bail: false });
-      loadFromURL();
+      loadFromURL(href);
       runTests();
     }
     window.addEventListener('popstate', function (e) {
-      loadFromURL();
+      loadFromURL(href);
       runTests();
     });
   </script>

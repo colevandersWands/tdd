@@ -1,3 +1,8 @@
+function mergeArrays(arr1, arr2) {
+  // write me!
+}
+
+
 const array1 = [0, 'e', true];
 const array2 = ['p', null, Infinity];
 
@@ -10,11 +15,7 @@ const mergeArraysTests = [
   { name: 'case 6', args: [array2, [undefined]], expected: ['p', null, Infinity, undefined] },
 ];
 
-function mergeArrays(arr1, arr2) {
-  // write me!
-}
-
-describe('copy arrays to avoid side effects', function () {
+describe('merge two arrays without modifying either', function () {
   mergeArraysTests.forEach(testCase => {
     it(testCase.name, () => {
       assert.deepStrictEqual(
