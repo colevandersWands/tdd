@@ -5,12 +5,16 @@
   <title>janke tdd</title>
   <meta name="description" content="janke tdd">
 
-  <script src="https://unpkg.com/prettier@1.13.0/standalone.js"></script>
+  <!-- why won't local parser-babylon work -->
+  <script src="./prettier/standalone.js"></script>
+  <!-- <script src="https://unpkg.com/prettier@1.13.0/standalone.js"></script> -->
+  <!-- <script src="./prettier/parser-babylon.js"></script> -->
   <script src="https://unpkg.com/prettier@1.13.0/parser-babylon.js"></script>
 
-  <link href="./mocha-assert/mocha.css" rel="stylesheet" />
-  <script src="./mocha-assert/mocha.js"></script>
-  <script src="./mocha-assert/assert.js"></script>
+  <link href="./mocha/style.css" rel="stylesheet" />
+  <script src="./mocha/index.js"></script>
+
+  <script src="./assert/index.js"></script>
 
   <script src="./ace/ace.js" type="text/javascript" charset="utf-8"></script>
 
@@ -28,7 +32,7 @@
     var href = window.location.href.substr(0, LastSlashIndex);
 
     window.onload = () => {
-      mocha.setup({ ui: 'bdd', bail: false });
+      mocha.setup({ ui: 'bdd', fullTrace: false });
       editor.setValue(loader.cache['']);
       loadFromURL(href);
       runTests();

@@ -6,15 +6,19 @@ const exercises = {
     'assert-dot-ok',
     'passing-tests',
   ],
-  ['using-assert']: [
+  // ['using-assert']: [
 
-  ],
+  // ],
   ['pure-functions']: [
     'merge-arrays',
     'merge-objects',
     'replace-by-index',
     'repeat-items',
   ],
+  ['objects-101']: [
+    'merge-arrays-1',
+    'merge-arrays-2',
+  ]
 }
 
 const loader = (basePath, exercisePath) => {
@@ -50,10 +54,10 @@ loader.cache = {
   it('complex types dont equal?', () => assert.notDeepStrictEqual([1,2,3], ['one', 'two']));
 
   it('value and type equal?', () => assert.strictEqual('1', '1'));
-  it('complex types dont equal?', () => assert.notStrictEqual(1, '1'));
+  it('value and type not equal?', () => assert.notStrictEqual(1, '1'));
 
-  it('throws?', () => assert.throws(() => { throw new Error(); }));
-  it('does not throw?', () => assert.doesNotThrow(() => {}));
+  it('throws an error?', () => assert.throws(() => { throw new Error(); }));
+  it('does not throw an error?', () => assert.doesNotThrow(() => {}));
 
 });`};
 
