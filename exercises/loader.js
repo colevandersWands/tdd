@@ -2,22 +2,30 @@ const exercises = {
   ['how-to-tdd']: [
     'test-suites',
     'tests',
+    'assert-101',
+    'assert-102',
     'nesting-test-suites',
-    'assert-dot-ok',
     'passing-tests',
   ],
-  // ['using-assert']: [
-
-  // ],
-  ['pure-functions']: [
+  ['function-challenges']: [
+    'shuffle',
+    'caesarize'
+  ],
+  ['avoiding-side-effects']: [
     'merge-arrays',
     'merge-objects',
     'replace-by-index',
     'repeat-items',
   ],
   ['objects-101']: [
-    'merge-arrays-1',
-    'merge-arrays-2',
+    'how-to-test-objects',
+    'remix-returned',
+    'remix-saved',
+    'merge-arrays-returned',
+    'merge-arrays-saved',
+    'save-in-an-array',
+    'save-in-an-object',
+    'meta'
   ]
 }
 

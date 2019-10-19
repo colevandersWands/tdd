@@ -18,7 +18,7 @@ describe(`the method merges with the array property`, () => {
     assert.deepStrictEqual(obj.array, [5, 1])
   });
   it('and still modifies the array property', () => {
-    obj.mergeArrays([-1]);
+    obj.mergeArrays([-5]);
     assert.deepStrictEqual(obj.array, [5, 1, -5])
   });
 });

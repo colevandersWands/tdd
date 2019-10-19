@@ -20,8 +20,7 @@
 function wrapInArray(thing) {
   // return []; // uncomment this line to pass the first test suite
   // return ['hi!']; // uncomment this line to pass the first and second test suites
-  // return [thing]; // uncomment this line to pass all 3 test suites
-  // can you pass the last tests?
+  // can you pass the last test set of tests?
 };
 
 describe('the wrapInArray function', () => {

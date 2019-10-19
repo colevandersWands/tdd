@@ -9,7 +9,7 @@ const runTests = () => {
     mocha.suite.suites = [];
 
     // could be better sandboxed
-    const newFunc = (new Function(`return function editor(){${code.toString()}}`))();
+    const newFunc = (new Function(`return function ____(){${code.toString()}}`))();
     newFunc();
 
     mocha.run();
