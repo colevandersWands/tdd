@@ -1,5 +1,5 @@
 /* Test Suites
-  in Mocha, a test suite id created by calling 'describe' with:
+  in Mocha, a test suite is created by calling 'describe' with:
     - a string describing what behavior you are testing
     - a function that uses the code you want to test
 
