@@ -30,7 +30,7 @@ A quick & dirty analogy might go like this:
 
 > TDD ensures the walls won't crumble, BDD ensures the building matches the blueprints.
 
-This project focuses entirely on TDD, we will discuss BDD later on in the Testing unit.
+These exercises focuses entirely on TDD, BDD will begin to make sense when you start building full web apps.
 
 [TOP](#index)
 
