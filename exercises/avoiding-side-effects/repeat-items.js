@@ -19,7 +19,7 @@ describe('repeat items in an array', function () {
   repeatItemsTests.forEach(testCase => {
     it(testCase.name, () => {
       assert.deepStrictEqual(
-        replaceItem(...testCase.args),
+        repeatItems(...testCase.args),
         testCase.expected
       )
     });
